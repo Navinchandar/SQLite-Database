@@ -1,17 +1,20 @@
 package com.example.sqlite;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener {
 	private EditText edit_name;
     private EditText edit_number;
     private Button b_add;
@@ -23,6 +26,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         createDatabase();
+        edit_name = (EditText) findViewById(R.id.edit_name);
+        edit_number = (EditText) findViewById(R.id.edit_number);
+ 
+        b_add = (Button) findViewById(R.id.b_add);
+        b_view = (Button) findViewById(R.id.b_view);
+ 
+        b_add.setOnClickListener(this);
+        b_view.setOnClickListener(this);
+        
          }
     private void createDatabase() {
 		// TODO Auto-generated method stub
@@ -57,4 +69,9 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+	@Override
+	public void onClick(View arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
