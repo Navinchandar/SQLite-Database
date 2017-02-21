@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MainActivity extends Activity {
@@ -28,14 +29,23 @@ public class MainActivity extends Activity {
     	 db=openOrCreateDatabase("PersonDB", Context.MODE_PRIVATE, null);
          db.execSQL("CREATE TABLE IF NOT EXISTS persons(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name VARCHAR,address VARCHAR);");
     	}
-
+    protected void insertIntoDB(){
+        String name = edit_name.getText().toString().trim();
+        String add = edit_number.getText().toString().trim();
+        if(name.equals("") || add.equals("")){
+            Toast.makeText(getApplicationContext(),"Please fill all fields", Toast.LENGTH_LONG).show();
+            return;
+        }
+        String query = "INSERT INTO persons (name,address) VALUES('"+name+"', '"+add+"');";
+        db.execSQL(query);
+        Toast.makeText(getApplicationContext(),"Contact Saved", Toast.LENGTH_LONG).show();
+    }
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
